@@ -2,6 +2,18 @@
 
 A lightweight task management web app built with **native PHP + SQLite**. TaskFlow combines regular task CRUD with an **Eisenhower Matrix** so tasks can be organized by urgency and importance while every meaningful change is stored in an activity history.
 
+## Screenshot
+
+![TaskFlow — Eisenhower Task Manager](./screenshot.png)
+
+Place your app screenshot in the **root folder** of this repository and name it:
+
+```text
+screenshot.png
+```
+
+GitHub will automatically display it in this README.
+
 ## Features
 
 - Create, edit, and permanently delete tasks
@@ -53,7 +65,7 @@ Deleted task activity remains readable in history.
 ## Project Structure
 
 ```text
-simple-task-manager/
+taskflow-eisenhower-matrix/
 ├── assets/
 │   └── style.css
 ├── data/
@@ -63,6 +75,8 @@ simple-task-manager/
 │   └── functions.php
 ├── .gitignore
 ├── .htaccess
+├── README.md
+├── screenshot.png
 ├── history.php
 ├── index.php
 ├── matrix.php
@@ -118,12 +132,12 @@ Stores the activity audit trail. History uses a nullable task reference so recor
 Recommended repository name:
 
 ```text
-simple-task-manager-sqlite
+taskflow-eisenhower-matrix
 ```
 
 Alternative names:
 
-- `taskflow-eisenhower-matrix`
+- `eisenhower-task-manager-sqlite`
 - `eisenhower-task-manager-php`
 - `php-sqlite-task-manager`
 - `task-management-web-app`

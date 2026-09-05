@@ -1,57 +1,49 @@
 # TaskFlow — Eisenhower Task Manager
 
-A lightweight task management web app built with **native PHP + SQLite**. TaskFlow combines regular task CRUD with an **Eisenhower Matrix** so tasks can be organized by urgency and importance while every meaningful change is stored in an activity history.
-
-## Screenshot
+TaskFlow is a lightweight task management web app built with **native PHP and SQLite**. It combines everyday task management with the **Eisenhower Matrix**, helping users organize work based on urgency and importance while keeping a complete activity history.
 
 ![TaskFlow — Eisenhower Task Manager](./screenshot.png)
 
-Place your app screenshot in the **root folder** of this repository and name it:
-
-```text
-screenshot.png
-```
-
-GitHub will automatically display it in this README.
-
 ## Features
 
-- Create, edit, and permanently delete tasks
-- Task status: **To Do**, **In Progress**, **Done**
-- Priority: **Low**, **Medium**, **High**
+- Create, edit, and delete tasks
+- Organize tasks using the Eisenhower Matrix
+- Task status: **To Do**, **In Progress**, and **Done**
+- Priority levels: **Low**, **Medium**, and **High**
 - Optional due dates
-- Search and filters
+- Search and filter tasks
+- Dedicated responsive Matrix view
+- Activity history for task changes
 - SQLite database with automatic initialization
-- Responsive desktop and mobile UI
-- Activity history / audit trail
-- Database migration for the Eisenhower Matrix field
+- Responsive interface for desktop and mobile
+- No frontend framework required
 
-### Eisenhower Matrix
+## Eisenhower Matrix
 
-Each task belongs to one of four quadrants:
+Tasks are grouped into four quadrants based on urgency and importance:
 
-| Quadrant | Urgency | Importance | Recommended action |
+| Quadrant | Urgency | Importance | Action |
 | --- | --- | --- | --- |
 | **Do** | Urgent | Important | Do it immediately |
 | **Decide / Schedule** | Not urgent | Important | Schedule a time to do it |
 | **Delegate** | Urgent | Not important | Assign it to someone else |
 | **Eliminate** | Not urgent | Not important | Remove or reduce it |
 
-The app includes a dedicated responsive **2×2 Matrix page**. On smaller screens the quadrants become a single-column layout.
+The Matrix page uses a 2×2 layout on desktop and adapts into a single-column layout on smaller screens.
 
-> **Note:** “Eliminate” is an Eisenhower category. Moving a task there does not delete the database record. Permanent deletion is a separate action.
+> **Note:** Moving a task to **Eliminate** does not permanently delete it. Permanent deletion is handled separately.
 
-## History
+## Activity History
 
-The activity log records events such as:
+TaskFlow keeps an audit trail of important actions, including:
 
-- Task created
-- Task updated
-- Status changed
-- Eisenhower quadrant changed
-- Task deleted
+- Task creation
+- Task updates
+- Status changes
+- Eisenhower quadrant changes
+- Task deletion
 
-Deleted task activity remains readable in history.
+History records remain available even after a task is permanently deleted.
 
 ## Tech Stack
 
@@ -60,7 +52,7 @@ Deleted task activity remains readable in history.
 - PDO SQLite
 - HTML5
 - CSS3
-- Small amount of native browser behavior only — no frontend framework
+- Vanilla browser APIs
 
 ## Project Structure
 
@@ -84,89 +76,93 @@ taskflow-eisenhower-matrix/
 └── task-form.php
 ```
 
-The SQLite database file `data/tasks.sqlite` is generated automatically and ignored by Git.
+The SQLite database file is created automatically at `data/tasks.sqlite` and is excluded from Git through `.gitignore`.
 
-## Run Locally
+## Getting Started
 
-Make sure PHP has the `pdo_sqlite` extension enabled.
+### Requirements
 
-### PHP built-in server
+- PHP 8 or newer
+- PDO SQLite extension enabled
+
+### Run with PHP Built-in Server
+
+Clone the repository and enter the project directory:
+
+```bash
+git clone https://github.com/your-username/taskflow-eisenhower-matrix.git
+cd taskflow-eisenhower-matrix
+```
+
+Start the local development server:
 
 ```bash
 php -S localhost:8000
 ```
 
-Open:
+Then open:
 
 ```text
 http://localhost:8000
 ```
 
-### XAMPP / Laragon
+### Run with XAMPP or Laragon
 
-1. Put the project folder inside `htdocs` for XAMPP or `www` for Laragon.
-2. Make sure PDO SQLite is enabled in PHP.
-3. Start Apache.
-4. Open the project through localhost.
+Place the project inside the local web root:
+
+- **XAMPP:** `htdocs`
+- **Laragon:** `www`
+
+Make sure the `pdo_sqlite` extension is enabled, start Apache, and open the project through localhost.
 
 ## Database
 
+TaskFlow uses SQLite, so no separate database server is required.
+
 ### `tasks`
 
-Stores:
+Stores task information such as:
 
-- title
-- description
-- status
-- priority
+- Title
+- Description
+- Status
+- Priority
 - Eisenhower quadrant
-- due date
-- created / updated timestamps
+- Due date
+- Created and updated timestamps
 
 ### `task_history`
 
-Stores the activity audit trail. History uses a nullable task reference so records can remain after a task is permanently deleted.
+Stores the activity log for each task. The task reference is nullable so historical records can remain available after a task is deleted.
 
-## GitHub Repository
+## How It Works
 
-Recommended repository name:
-
-```text
-taskflow-eisenhower-matrix
-```
-
-Alternative names:
-
-- `eisenhower-task-manager-sqlite`
-- `eisenhower-task-manager-php`
-- `php-sqlite-task-manager`
-- `task-management-web-app`
-
-Suggested GitHub description:
-
-> Simple PHP + SQLite task manager with CRUD, activity history, filters, and an Eisenhower Matrix for urgency and importance.
-
-Suggested topics:
+When the application starts for the first time, it checks whether the SQLite database exists. If it does not, TaskFlow automatically creates the database using `data/schema.sql`.
 
 ```text
-php sqlite task-manager eisenhower-matrix crud productivity web-app portfolio-project responsive-design
+Open TaskFlow
+     ↓
+Check SQLite database
+     ↓
+Database missing?
+     ↓
+Initialize from schema.sql
+     ↓
+TaskFlow is ready
 ```
 
-## Why This Project?
+## Roadmap
 
-This repository intentionally avoids a heavy framework so the application logic is easy to inspect. It demonstrates practical CRUD operations, SQLite persistence, SQL queries, filtering, responsive interface design, database migration, and audit-history behavior in a compact project.
+Future improvements may include:
 
-## Possible Improvements
-
-- Authentication and multiple users
-- Drag-and-drop tasks between Matrix quadrants
-- Project/workspace support
+- User authentication
+- Multiple users and workspaces
+- Drag-and-drop between Matrix quadrants
 - Recurring tasks
-- Tags
+- Tags and categories
 - Dark mode
-- CSRF protection for production use
-- History export to CSV
+- CSV history export
 
 ## License
 
-No license file is included by default. Add a license according to how you want others to use the source code. MIT is a common choice for an open-source portfolio project.
+This project is currently distributed without an open-source license.
